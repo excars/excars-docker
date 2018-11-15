@@ -1,0 +1,18 @@
+sudo: required
+dist: trusty
+
+services:
+  - docker
+
+before_install:
+  - curl -fsSL https://raw.githubusercontent.com/excars/excars-back/master/Pipfile > Pipfile
+  - curl -fsSL https://raw.githubusercontent.com/excars/excars-back/master/Pipfile.lock > Pipfile.lock
+
+script:
+  - docker build . -t excars-base
+
+deploy:
+  provider: script
+  script: bash docker_push.sh
+  on:
+    branch: master
