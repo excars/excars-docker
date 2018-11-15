@@ -9,7 +9,10 @@ before_install:
   - curl -fsSL https://raw.githubusercontent.com/excars/excars-back/master/Pipfile.lock > Pipfile.lock
 
 script:
-  - docker build . -t excars-base
+  - docker build . -t excars/excars-base
+
+after_success:
+  - rm -rf Pipfile Pipfile.lock
 
 deploy:
   provider: script
